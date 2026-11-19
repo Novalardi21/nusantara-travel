@@ -11,6 +11,10 @@ abstract class TestCase extends BaseTestCase
 {
     protected function createTravelTables(): void
     {
+        if (Schema::hasTable('jadwal')) {
+            return;
+        }
+
         if (! Schema::hasTable('member')) {
             Schema::create('member', function (Blueprint $table): void {
                 $table->increments('id_member');

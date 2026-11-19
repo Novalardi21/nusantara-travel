@@ -5,48 +5,13 @@ namespace Tests\Feature;
 use App\Models\Admin;
 use App\Models\Member;
 use App\Models\OperatorLoket;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class AccountAuthenticationTest extends TestCase
 {
     use RefreshDatabase;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Schema::create('member', function (Blueprint $table): void {
-            $table->increments('id_member');
-            $table->string('nama', 100);
-            $table->string('alamat', 100);
-            $table->string('telepon', 20);
-            $table->enum('jen_kelamin', ['L', 'P']);
-            $table->string('username', 20);
-            $table->string('password', 20);
-        });
-
-        Schema::create('admin', function (Blueprint $table): void {
-            $table->increments('id_admin');
-            $table->string('email', 50);
-            $table->string('password', 50);
-            $table->string('no_telp', 20);
-            $table->string('nama_lengkap', 100);
-        });
-
-        Schema::create('operator_loket', function (Blueprint $table): void {
-            $table->increments('id_opr');
-            $table->string('user', 50);
-            $table->string('password', 50);
-            $table->string('nama', 100);
-        });
-
-        $migration = require database_path('migrations/2026_11_12_140950_widen_legacy_account_passwords_and_enforce_unique_member_username.php');
-        $migration->up();
-    }
 
     public function test_login_and_registration_pages_render_with_a_single_login_form(): void
     {
